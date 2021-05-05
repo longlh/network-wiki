@@ -1,0 +1,19 @@
+version: '3.5'
+services:
+  mongo:
+    image: mongo:3.6
+    volumes:
+      - ./.data/mongo:/data/db
+    ports:
+      - "27050:27017"
+
+  network-wiki:
+    image: node:12
+    container_name: network-wiki
+    command: bash -c "tail -f /dev/null"
+    working_dir: /usr/network-wiki
+    volumes:
+      - ..:/usr/network-wiki
+      - /usr/network-wiki/node_modules
+    ports:
+      - "5000:5000"
